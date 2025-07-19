@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BNG Settings</title>
+    <style>
+      table { width: 100%; border-collapse: collapse; }
+      th, td { border: 1px solid #ccc; padding: 8px; }
+      th { background: #f0f0f0; }
+      input[type="text"] { width: 90%; }
+      .add-row { margin-top: 10px; }
+    </style>
+  </head>
+  <body>
+    <h1>BNG Redirect Settings</h1>
+    <table id="redirectTable">
+      <thead>
+        <tr>
+          <th>Search Engine</th>
+          <th>Redirect To</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="add-row">
+      <input type="text" id="newFrom" placeholder="From (e.g. bing.com)">
+      <input type="text" id="newTo" placeholder="To (e.g. google.com)">
+      <button id="addBtn">Add Custom</button>
+    </div>
+    <script src="settings.js"></script>
+  </body>
+</html>
