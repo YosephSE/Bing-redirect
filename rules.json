@@ -1,16 +1,58 @@
 [
-    {
-      "id": 1,
-      "priority": 1,
-      "action": {
-        "type": "redirect",
-        "redirect": {
-          "regexSubstitution": "https://www.google.com/search?q=\\1"
-        }
-      },
-      "condition": {
-        "regexFilter": "^https://www\\.bing\\.com/search\\?q=([^&]+)",
-        "resourceTypes": ["main_frame"]
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://www.google.com/search?q=\\1"
       }
+    },
+    "condition": {
+      "regexFilter": "^https://www\\.bing\\.com/search\\?q=([^&]+)",
+      "resourceTypes": ["main_frame"]
     }
-  ]
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://www.google.com/search?q=\\1"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://duckduckgo\\.com/\\?.*[?&]q=([^&]+)",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://www.google.com/search?q=\\1"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://search\\.yahoo\\.com/search\\?.*[?&]p=([^&]+)",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://www.google.com/search?q=\\1"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://www\\.baidu\\.com/s\\?.*[?&]wd=([^&]+)",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]

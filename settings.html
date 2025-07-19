@@ -2,31 +2,361 @@
 <html>
   <head>
     <title>BNG Settings</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      table { width: 100%; border-collapse: collapse; }
-      th, td { border: 1px solid #ccc; padding: 8px; }
-      th { background: #f0f0f0; }
-      input[type="text"] { width: 90%; }
-      .add-row { margin-top: 10px; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        animation: slideIn 0.6s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        font-weight: 300;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-title::before {
+        content: "⚙️";
+        font-size: 1.2rem;
+      }
+
+      .table-container {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        margin-bottom: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+      }
+
+      th {
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        color: #4a5568;
+        font-weight: 600;
+        padding: 18px 20px;
+        text-align: left;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      td {
+        padding: 15px 20px;
+        border-bottom: 1px solid #f1f5f9;
+        transition: background-color 0.2s ease;
+      }
+
+      tr:hover td {
+        background-color: #f8fafc;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        transition: all 0.2s ease;
+        background: white;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      input[type="text"]::placeholder {
+        color: #a0aec0;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-danger {
+        background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
+      }
+
+      .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(245, 101, 101, 0.4);
+      }
+
+      .add-section {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+      }
+
+      .add-section h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .add-section h3::before {
+        content: "➕";
+        font-size: 1rem;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 15px;
+        align-items: end;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-group label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #4a5568;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #718096;
+      }
+
+      .empty-state p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+      }
+
+      .status-message {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .status-message.show {
+        opacity: 1;
+      }
+
+      .status-success {
+        background: #c6f6d5;
+        color: #22543d;
+        border: 1px solid #9ae6b4;
+      }
+
+      .status-error {
+        background: #fed7d7;
+        color: #742a2a;
+        border: 1px solid #feb2b2;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          margin: 10px;
+          border-radius: 15px;
+        }
+
+        .content {
+          padding: 25px;
+        }
+
+        .header {
+          padding: 25px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        table {
+          font-size: 0.9rem;
+        }
+
+        th,
+        td {
+          padding: 12px 15px;
+        }
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
-    <h1>BNG Redirect Settings</h1>
-    <table id="redirectTable">
-      <thead>
-        <tr>
-          <th>Search Engine</th>
-          <th>Redirect To</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <div class="add-row">
-      <input type="text" id="newFrom" placeholder="From (e.g. bing.com)">
-      <input type="text" id="newTo" placeholder="To (e.g. google.com)">
-      <button id="addBtn">Add Custom</button>
+    <div class="container">
+      <div class="header">
+        <h1>BNG Redirect Settings</h1>
+        <p>Configure your search engine redirects with ease</p>
+      </div>
+
+      <div class="content">
+        <div id="statusMessage" class="status-message"></div>
+
+        <div class="section-title">Current Redirects</div>
+
+        <div class="table-container">
+          <table id="redirectTable">
+            <thead>
+              <tr>
+                <th>Search Engine</th>
+                <th>Redirect To</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table content will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="add-section">
+          <h3>Add New Redirect</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newFrom">From (e.g., bing.com)</label>
+              <input
+                type="text"
+                id="newFrom"
+                placeholder="Enter search engine domain"
+              />
+            </div>
+            <div class="form-group">
+              <label for="newTo">To (e.g., google.com)</label>
+              <input type="text" id="newTo" placeholder="Enter target domain" />
+            </div>
+            <button id="addBtn" class="btn btn-primary">
+              <span class="btn-text">Add Redirect</span>
+              <span class="loading" style="display: none"></span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+
     <script src="settings.js"></script>
   </body>
 </html>
